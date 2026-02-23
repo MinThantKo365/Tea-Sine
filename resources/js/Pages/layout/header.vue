@@ -32,12 +32,12 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" @click="closeMenu">
-                <span class="nav-text">Dashboard</span>
+                <span class="nav-text">Tables</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" @click="closeMenu">
-                <span class="nav-text">Items</span>
+                <span class="nav-text">Products</span>
               </a>
             </li>
             <li class="nav-item">
