@@ -32,7 +32,15 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/home');
+            $user = Auth::user();
+
+            return match ($user->role?->name) {
+                'admin' => redirect()->intended(route('admin.dashboard')),
+                'cashier' => redirect()->intended(route('cashier.orders.create')),
+                'cook' => redirect()->intended(route('cook.orders.index')),
+                'staff' => redirect()->intended(route('staff.payslips.index')),
+                default => redirect()->intended(route('dashboard')),
+            };
         }
 
         return back()->withErrors([

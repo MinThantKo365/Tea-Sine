@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -44,5 +45,35 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Role::class);
+    }
+
+    public function staff(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(\App\Models\Staff::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role?->name === 'admin';
+    }
+
+    public function isCashier(): bool
+    {
+        return $this->role?->name === 'cashier';
+    }
+
+    public function isCook(): bool
+    {
+        return $this->role?->name === 'cook';
+    }
+
+    public function isStaff(): bool
+    {
+        return $this->role?->name === 'staff';
     }
 }

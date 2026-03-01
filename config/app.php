@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'order_tax_rate' => (float) env('ORDER_TAX_RATE', 0),
+
 ];
