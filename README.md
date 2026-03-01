@@ -23,14 +23,14 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Installation Laravel 
 
-composer install -- First Step
-npm install -- Second Step
-php artisan key:generate -- Third Step
-php artisan migrate -- Fourth Step
+- composer install -- First Step
+- npm install -- Second Step
+- php artisan key:generate -- Third Step
+- php artisan migrate -- Fourth Step
 
 ## To Run
-php artisan serve -- Fourth Step
-npm run dev -- Fifth Step
+- php artisan serve -- Fourth Step
+- npm run dev -- Fifth Step
 
 ## License
 
