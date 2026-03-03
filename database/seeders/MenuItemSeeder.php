@@ -10,13 +10,13 @@ class MenuItemSeeder extends Seeder
     public function run(): void
     {
         $items = [
-            ['name' => 'Green Tea', 'description' => 'Classic green tea', 'price' => 2.50, 'category' => 'Tea'],
-            ['name' => 'Black Tea', 'description' => 'Earl Grey style', 'price' => 2.50, 'category' => 'Tea'],
-            ['name' => 'Milk Tea', 'description' => 'Creamy milk tea', 'price' => 3.50, 'category' => 'Tea'],
-            ['name' => 'Iced Coffee', 'description' => 'Chilled coffee', 'price' => 3.00, 'category' => 'Coffee'],
-            ['name' => 'Latte', 'description' => 'Espresso with milk', 'price' => 4.00, 'category' => 'Coffee'],
-            ['name' => 'Croissant', 'description' => 'Buttery pastry', 'price' => 2.00, 'category' => 'Pastry'],
-            ['name' => 'Sandwich', 'description' => 'Club sandwich', 'price' => 5.50, 'category' => 'Food'],
+            ['name' => 'Phone Mhan Tea', 'description' => 'Classic tea', 'price' => 2000, 'category' => 'Tea'],
+            ['name' => 'Cho Saint Tea', 'description' => 'Sweet milk tea', 'price' => 2000, 'category' => 'Tea'],
+            ['name' => 'Kya Saint Tea', 'description' => 'Strong milk tea', 'price' => 2000, 'category' => 'Tea'],
+            ['name' => 'Cho-kya Tea', 'description' => 'Sweet and strong tea', 'price' => 2000, 'category' => 'Tea'],
+            ['name' => 'Se Lone Tea', 'description' => 'Tea with Malai (milky/buttery)', 'price' => 2000, 'category' => 'Tea'],
+            ['name' => 'Three-color Tea', 'description' => 'Condensed, evaporated, and brewed tea', 'price' => 3500, 'category' => 'Tea'],
+            ['name' => 'Lahpet Thoke', 'description' => 'Tea leaf salad', 'price' => 2500, 'category' => 'Food'],
         ];
 
         foreach ($items as $item) {

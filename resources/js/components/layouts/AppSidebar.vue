@@ -26,7 +26,7 @@
     </nav>
     <div class="sidebar-footer">
       <button type="button" class="nav-link logout-link" @click="logout">
-        <span class="nav-icon">&#x2190;</span>
+        <!-- <span class="nav-icon">&#x2190;</span> -->
         <span class="nav-label">Logout</span>
       </button>
     </div>

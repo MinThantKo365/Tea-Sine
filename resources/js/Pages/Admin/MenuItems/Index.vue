@@ -20,7 +20,7 @@
           <tr v-for="item in menuItems" :key="item.id">
             <td>{{ item.name }}</td>
             <td>{{ item.category || '—' }}</td>
-            <td>${{ Number(item.price).toFixed(2) }}</td>
+            <td>{{ Number(item.price).toFixed(0) }} Ks</td>
             <td><span :class="item.is_available ? 'text-success' : 'text-danger'">{{ item.is_available ? 'Yes' : 'No' }}</span></td>
             <td>
               <Link :href="`/admin/menu-items/${item.id}/edit`" class="btn btn-sm btn-outline-light me-1">Edit</Link>

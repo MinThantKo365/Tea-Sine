@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\PayslipController as AdminPayslipController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Cashier\OrderController as CashierOrderController;
 use App\Http\Controllers\Cashier\PaymentController as CashierPaymentController;
 use App\Http\Controllers\Cook\OrderController as CookOrderController;
@@ -32,6 +33,7 @@ Route::middleware('auth')->group(function () {
         Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
         Route::get('payments', [AdminPaymentController::class, 'index'])->name('payments.index');
         Route::resource('staff', StaffController::class)->only(['index', 'store', 'update']);
+        Route::resource('users', UserController::class)->only(['index', 'create', 'store']);
         Route::get('payslips', [AdminPayslipController::class, 'index'])->name('payslips.index');
         Route::get('payslips/create', [AdminPayslipController::class, 'create'])->name('payslips.create');
         Route::post('payslips', [AdminPayslipController::class, 'store'])->name('payslips.store');

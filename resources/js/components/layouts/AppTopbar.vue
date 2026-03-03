@@ -12,7 +12,9 @@
     </div>
     <div class="topbar-user">
       <div class="dropdown">
-        <button class="btn btn-link dropdown-toggle text-white text-decoration-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="user-name">{{ user?.name }}</span>
+          <span class="badge bg-secondary ms-1">{{ user?.role?.display_name || 'User' }}</span>
+        <!-- <button class="btn btn-link dropdown-toggle text-white text-decoration-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           <span class="user-name">{{ user?.name }}</span>
           <span class="badge bg-secondary ms-1">{{ user?.role?.display_name || 'User' }}</span>
         </button>
@@ -22,7 +24,7 @@
           <li>
             <button type="button" class="dropdown-item text-danger" @click="logout">Logout</button>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
   </header>

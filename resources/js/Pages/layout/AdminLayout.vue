@@ -38,9 +38,10 @@ const menuItems = [
   { label: 'Orders', href: '/admin/orders' },
   { label: 'Payments', href: '/admin/payments' },
   { label: 'Menu Management', href: '/admin/menu-items' },
-  { label: 'Staff', href: '/admin/staff' },
-  { label: 'Payslips', href: '/admin/payslips' },
-  { label: 'Reports', href: '/admin/reports' },
+  { label: 'User Accounts', href: '/admin/users' },
+  // { label: 'Staff', href: '/admin/staff' },
+  // { label: 'Payslips', href: '/admin/payslips' },
+  // { label: 'Reports', href: '/admin/reports' },
 ]
 </script>
 
