@@ -12,6 +12,9 @@
     </div>
     <div class="topbar-actions">
       <ThemeToggle />
+      <Link href="/account/password" class="topbar-password-link" title="Change password">
+        <i class="fa-solid fa-key" aria-hidden="true"></i>
+      </Link>
       <div class="topbar-user">
         <span class="user-name">{{ user?.name }}</span>
         <span class="badge bg-secondary ms-1">{{ user?.role?.display_name || 'User' }}</span>
@@ -21,6 +24,7 @@
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/vue3'
 import ThemeToggle from '../ThemeToggle.vue'
 
 defineProps({
@@ -71,6 +75,24 @@ defineEmits(['toggle-sidebar'])
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+.topbar-password-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--ts-border);
+  background: var(--ts-surface-alt);
+  color: var(--ts-text);
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.topbar-password-link:hover {
+  background: var(--ts-sidebar-hover);
+  border-color: var(--ts-accent);
+  color: var(--ts-accent);
 }
 .topbar-user .user-name {
   font-size: 0.9rem;

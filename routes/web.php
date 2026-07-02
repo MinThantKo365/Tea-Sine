@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\MenuItemController;
@@ -26,6 +27,8 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::get('/account/password', [AccountController::class, 'editPassword'])->name('account.password.edit');
+    Route::put('/account/password', [AccountController::class, 'updatePassword'])->name('account.password.update');
 
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', AdminDashboardController::class)->name('dashboard');
@@ -34,6 +37,8 @@ Route::middleware('auth')->group(function () {
         Route::get('payments', [AdminPaymentController::class, 'index'])->name('payments.index');
         Route::resource('staff', StaffController::class)->only(['index', 'store', 'update']);
         Route::resource('users', UserController::class)->only(['index', 'create', 'store']);
+        Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::put('users/{user}/password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
         Route::get('payslips', [AdminPayslipController::class, 'index'])->name('payslips.index');
         Route::get('payslips/create', [AdminPayslipController::class, 'create'])->name('payslips.create');
         Route::post('payslips', [AdminPayslipController::class, 'store'])->name('payslips.store');

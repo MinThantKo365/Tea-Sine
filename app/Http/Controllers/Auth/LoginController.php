@@ -30,9 +30,19 @@ class LoginController extends Controller
         $remember = $request->boolean('remember');
 
         if (Auth::attempt($credentials, $remember)) {
-            $request->session()->regenerate();
-
             $user = Auth::user();
+
+            if ($user->isSuspended()) {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return back()->withErrors([
+                    'email' => 'Your account has been suspended. Please contact an administrator.',
+                ])->onlyInput('email');
+            }
+
+            $request->session()->regenerate();
 
             return match ($user->role?->name) {
                 'admin' => redirect()->intended(route('admin.dashboard')),
