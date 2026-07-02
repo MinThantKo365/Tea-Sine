@@ -66,7 +66,7 @@
               />
               <span>Remember me</span>
             </label>
-            <a href="#" class="forgot-link">Forgot password?</a>
+            <a href="#" class="forgot-link d-none">Forgot password?</a>
           </div>
 
           <!-- Submit Button -->
@@ -82,12 +82,12 @@
       </div>
 
       <!-- Sign Up Link -->
-      <div class="text-center mt-4">
+      <!-- <div class="text-center mt-4">
         <p class="signup-text">
           Don't have an account?
           <a href="/register" class="signup-link">Create one now</a>
         </p>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
