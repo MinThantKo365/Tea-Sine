@@ -34,17 +34,8 @@ const pageTitle = computed(() => page.props.pageTitle || 'Cashier')
 const sidebarOpen = ref(false)
 
 const menuItems = [
-  { label: 'Create Order', href: '/cashier/orders/create' },
-  { label: 'Order List', href: '/cashier/orders' },
-  { label: 'Payments', href: '/cashier/payments' },
+  { label: 'Create Order', href: '/cashier/orders/create', icon: 'fa-solid fa-cart-plus' },
+  { label: 'Order List', href: '/cashier/orders', icon: 'fa-solid fa-list' },
+  { label: 'Payments', href: '/cashier/payments', icon: 'fa-solid fa-credit-card' },
 ]
 </script>
-
-<style scoped>
-.dashboard-layout { display: flex; min-height: 100vh; background: #0a0a0a; }
-.layout-main { flex: 1; margin-left: 260px; display: flex; flex-direction: column; min-width: 0; }
-.layout-content { flex: 1; padding: 1.5rem; }
-@media (max-width: 991.98px) {
-  .layout-main { margin-left: 0; }
-}
-</style>

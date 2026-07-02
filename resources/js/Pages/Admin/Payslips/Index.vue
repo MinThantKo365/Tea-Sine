@@ -49,11 +49,11 @@
           <tr v-for="p in payslips.data" :key="p.id">
             <td>{{ p.staff?.user?.name }}</td>
             <td>{{ p.period_month }}/{{ p.period_year }}</td>
-            <td>${{ Number(p.basic_salary).toFixed(2) }}</td>
-            <td>${{ Number(p.overtime_pay).toFixed(2) }}</td>
-            <td>${{ Number(p.bonus).toFixed(2) }}</td>
-            <td>${{ Number(p.deduction).toFixed(2) }}</td>
-            <td>${{ Number(p.net_salary).toFixed(2) }}</td>
+            <td>{{ formatCurrency(p.basic_salary) }}</td>
+            <td>{{ formatCurrency(p.overtime_pay) }}</td>
+            <td>{{ formatCurrency(p.bonus) }}</td>
+            <td>{{ formatCurrency(p.deduction) }}</td>
+            <td>{{ formatCurrency(p.net_salary) }}</td>
             <td>{{ p.status }}</td>
             <td>
               <button v-if="p.status === 'pending'" type="button" class="btn btn-sm btn-success" @click="markPaid(p)">Mark Paid</button>
@@ -75,6 +75,7 @@ import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
 import AdminLayout from '../../layout/AdminLayout.vue'
 import { Link } from '@inertiajs/vue3'
+import { formatCurrency } from '../../../utils/formatCurrency'
 
 const props = defineProps({ payslips: Object, staffList: Array, filters: Object })
 const filters = ref({ ...(props.filters || {}), year: props.filters?.year || '', month: props.filters?.month || '', staff_id: props.filters?.staff_id || '' })

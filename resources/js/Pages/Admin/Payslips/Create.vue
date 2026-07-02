@@ -6,7 +6,7 @@
         <label class="form-label text-white">Staff</label>
         <select v-model="form.staff_id" class="form-select bg-secondary border-0 text-white" required>
           <option value="">Select staff</option>
-          <option v-for="s in staff" :key="s.id" :value="s.id">{{ s.user?.name }} ({{ s.employee_code }}) - ${{ Number(s.basic_salary).toFixed(2) }}</option>
+          <option v-for="s in staff" :key="s.id" :value="s.id">{{ s.user?.name }} ({{ s.employee_code }}) - {{ formatCurrency(s.basic_salary) }}</option>
         </select>
         <div v-if="form.errors.staff_id" class="text-danger small">{{ form.errors.staff_id }}</div>
       </div>
@@ -47,6 +47,7 @@
 import { useForm } from '@inertiajs/vue3'
 import AdminLayout from '../../layout/AdminLayout.vue'
 import { Link } from '@inertiajs/vue3'
+import { formatCurrency } from '../../../utils/formatCurrency'
 
 const props = defineProps({ staff: Array })
 const now = new Date()

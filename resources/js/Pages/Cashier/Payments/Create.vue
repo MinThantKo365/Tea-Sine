@@ -4,7 +4,7 @@
     <div class="card bg-dark border-secondary mb-4">
       <div class="card-body">
         <p class="text-white mb-1">Order: <strong>{{ order.order_number }}</strong></p>
-        <p class="text-white mb-0">Amount due: <strong>${{ Number(order.total).toFixed(2) }}</strong></p>
+        <p class="text-white mb-0">Amount due: <strong>{{ formatCurrency(order.total) }}</strong></p>
       </div>
     </div>
     <form @submit.prevent="submit" class="card bg-dark border-secondary p-4" style="max-width: 400px;">
@@ -27,7 +27,10 @@
       </div>
       <div v-if="form.errors.order_id" class="text-danger small mb-2">{{ form.errors.order_id }}</div>
       <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-primary" :disabled="form.processing">Record Payment</button>
+        <button type="submit" class="btn btn-primary" :disabled="form.processing">
+          <i class="fa-solid fa-check me-1" aria-hidden="true"></i>
+          {{ form.processing ? 'Processing...' : 'Record Payment' }}
+        </button>
         <Link :href="`/cashier/orders/${order.id}`" class="btn btn-outline-secondary">Cancel</Link>
       </div>
     </form>
@@ -38,6 +41,7 @@
 import { useForm } from '@inertiajs/vue3'
 import CashierLayout from '../../layout/CashierLayout.vue'
 import { Link } from '@inertiajs/vue3'
+import { formatCurrency } from '../../../utils/formatCurrency'
 
 const props = defineProps({ order: Object })
 

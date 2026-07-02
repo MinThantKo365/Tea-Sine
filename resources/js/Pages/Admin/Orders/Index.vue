@@ -16,7 +16,7 @@
           <tr v-for="order in orders.data" :key="order.id">
             <td>{{ order.order_number }}</td>
             <td>{{ order.customer_name || '—' }}</td>
-            <td>${{ Number(order.total).toFixed(2) }}</td>
+            <td>{{ formatCurrency(order.total) }}</td>
             <td><span :class="statusClass(order.status)">{{ order.status }}</span></td>
             <td>{{ new Date(order.created_at).toLocaleString() }}</td>
           </tr>
@@ -34,6 +34,7 @@
 <script setup>
 import AdminLayout from '../../layout/AdminLayout.vue'
 import { Link } from '@inertiajs/vue3'
+import { formatCurrency } from '../../../utils/formatCurrency'
 
 defineProps({ orders: Object })
 

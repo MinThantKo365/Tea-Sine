@@ -16,7 +16,7 @@
           <tbody>
             <tr v-for="p in payslips.data" :key="p.id">
               <td>{{ p.period_month }}/{{ p.period_year }}</td>
-              <td>${{ Number(p.net_salary).toFixed(2) }}</td>
+              <td>{{ formatCurrency(p.net_salary) }}</td>
               <td>{{ p.status }}</td>
               <td><Link :href="`/staff/payslips/${p.id}`" class="btn btn-sm btn-outline-light">View</Link></td>
             </tr>
@@ -35,6 +35,7 @@
 <script setup>
 import StaffLayout from '../../layout/StaffLayout.vue'
 import { Link } from '@inertiajs/vue3'
+import { formatCurrency } from '../../../utils/formatCurrency'
 
 defineProps({ payslips: Object, staff: Object })
 </script>

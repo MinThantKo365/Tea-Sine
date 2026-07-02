@@ -11,13 +11,13 @@
               <div v-for="item in menuItems" :key="item.id" class="col-6 col-md-4">
                 <button
                   type="button"
-                  class="btn w-100 d-flex flex-column align-items-center p-3"
+                  class="btn menu-item-btn w-100 d-flex flex-column align-items-center p-3"
                   :class="item.is_available ? 'btn-outline-light' : 'btn-secondary disabled'"
                   :disabled="!item.is_available"
                   @click="addItem(item)"
                 >
                   <span class="fw-bold text-truncate w-100">{{ item.name }}</span>
-                  <small class="text-white-50">${{ Number(item.price).toFixed(2) }}</small>
+                  <small class="menu-item-price">{{ formatCurrency(item.price) }}</small>
                 </button>
               </div>
             </div>
@@ -36,7 +36,7 @@
               <li v-for="(line, i) in cart" :key="i" class="list-group-item bg-transparent border-secondary d-flex justify-content-between align-items-center text-white">
                 <span>{{ line.name }} x{{ line.quantity }}</span>
                 <div>
-                  <span class="me-2">${{ (line.unit_price * line.quantity).toFixed(2) }}</span>
+                  <span class="me-2">{{ formatCurrency(line.unit_price * line.quantity) }}</span>
                   <button type="button" class="btn btn-sm btn-outline-danger py-0" @click="removeAt(i)">×</button>
                 </div>
               </li>
@@ -51,19 +51,23 @@
                 <input v-model="form.table_number" type="text" class="form-control form-control-sm bg-secondary border-0 text-white" placeholder="Optional" />
               </div>
               <div class="mb-2">
+                <label class="form-label text-white small mb-0">Notes</label>
+                <textarea v-model="form.notes" rows="2" class="form-control form-control-sm bg-secondary border-0 text-white" placeholder="Special requests, allergies, etc. (optional)"></textarea>
+              </div>
+              <div class="mb-2">
                 <label class="form-label text-white small mb-0">Tax %</label>
                 <input v-model.number="form.tax_rate" type="number" step="0.1" min="0" class="form-control form-control-sm bg-secondary border-0 text-white" />
               </div>
               <div class="mb-2">
-                <label class="form-label text-white small mb-0">Discount $</label>
-                <input v-model.number="form.discount" type="number" step="0.01" min="0" class="form-control form-control-sm bg-secondary border-0 text-white" />
+                <label class="form-label text-white small mb-0">Discount (Ks)</label>
+                <input v-model.number="form.discount" type="number" step="1" min="0" class="form-control form-control-sm bg-secondary border-0 text-white" />
               </div>
             </div>
             <hr class="border-secondary" />
-            <div class="d-flex justify-content-between text-white mb-1"><span>Subtotal</span><span>${{ subtotal.toFixed(2) }}</span></div>
-            <div class="d-flex justify-content-between text-white mb-1"><span>Tax</span><span>${{ taxAmount.toFixed(2) }}</span></div>
-            <div class="d-flex justify-content-between text-white mb-2"><span>Discount</span><span>-${{ form.discount || 0 }}</span></div>
-            <div class="d-flex justify-content-between text-white fs-5"><strong>Total</strong><strong>${{ total.toFixed(2) }}</strong></div>
+            <div class="d-flex justify-content-between text-white mb-1"><span>Subtotal</span><span>{{ formatCurrency(subtotal) }}</span></div>
+            <div class="d-flex justify-content-between text-white mb-1"><span>Tax</span><span>{{ formatCurrency(taxAmount) }}</span></div>
+            <div class="d-flex justify-content-between text-white mb-2"><span>Discount</span><span>-{{ formatCurrency(form.discount || 0) }}</span></div>
+            <div class="d-flex justify-content-between text-white fs-5"><strong>Total</strong><strong>{{ formatCurrency(total) }}</strong></div>
             <button type="button" class="btn btn-primary w-100 mt-3" :disabled="!cart.length || form.processing" @click="submit">Confirm Order</button>
           </div>
         </div>
@@ -76,6 +80,7 @@
 import { ref, computed } from 'vue'
 import CashierLayout from '../../layout/CashierLayout.vue'
 import { useForm } from '@inertiajs/vue3'
+import { formatCurrency } from '../../../utils/formatCurrency'
 
 const props = defineProps({ menuItems: Array, taxRate: Number })
 
@@ -107,3 +112,17 @@ function submit() {
   form.post('/cashier/orders')
 }
 </script>
+
+<style scoped>
+.menu-item-btn .menu-item-price {
+  color: var(--ts-text-muted);
+}
+.menu-item-btn:hover .menu-item-price,
+.menu-item-btn:focus .menu-item-price {
+  color: #fff;
+}
+[data-theme="light"] .menu-item-btn:hover .menu-item-price,
+[data-theme="light"] .menu-item-btn:focus .menu-item-price {
+  color: #fff;
+}
+</style>

@@ -18,8 +18,8 @@
           <tr v-for="s in staff" :key="s.id">
             <td>{{ s.employee_code }}</td>
             <td>{{ s.user?.name }}</td>
-            <td>${{ Number(s.basic_salary).toFixed(2) }}</td>
-            <td>{{ s.overtime_rate_per_hour ? '$' + Number(s.overtime_rate_per_hour).toFixed(2) : '—' }}</td>
+            <td>{{ formatCurrency(s.basic_salary) }}</td>
+            <td>{{ s.overtime_rate_per_hour ? formatCurrency(s.overtime_rate_per_hour) : '—' }}</td>
             <td>{{ s.joined_at ? new Date(s.joined_at).toLocaleDateString() : '—' }}</td>
             <td><button type="button" class="btn btn-sm btn-outline-light" @click="openEdit(s)">Edit</button></td>
           </tr>
@@ -88,6 +88,7 @@
 import { ref, watch } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import AdminLayout from '../../layout/AdminLayout.vue'
+import { formatCurrency } from '../../../utils/formatCurrency'
 
 const props = defineProps({ staff: Array, usersWithoutStaff: Array })
 

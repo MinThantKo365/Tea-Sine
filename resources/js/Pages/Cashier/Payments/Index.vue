@@ -29,7 +29,7 @@
           <button type="submit" class="btn btn-sm btn-primary">Filter</button>
         </div>
       </form>
-      <p class="text-white mb-0 mt-2">Daily total: <strong>${{ dailyTotal.toFixed(2) }}</strong></p>
+      <p class="text-white mb-0 mt-2">Daily total: <strong>{{ formatCurrency(dailyTotal) }}</strong></p>
     </div>
     <div class="table-responsive">
       <table class="table table-dark table-striped">
@@ -45,7 +45,7 @@
         <tbody>
           <tr v-for="p in payments.data" :key="p.id">
             <td>{{ p.order?.order_number }}</td>
-            <td>${{ Number(p.amount).toFixed(2) }}</td>
+            <td>{{ formatCurrency(p.amount) }}</td>
             <td>{{ p.method }}</td>
             <td>{{ p.status }}</td>
             <td>{{ new Date(p.created_at).toLocaleString() }}</td>
@@ -66,6 +66,7 @@ import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
 import CashierLayout from '../../layout/CashierLayout.vue'
 import { Link } from '@inertiajs/vue3'
+import { formatCurrency } from '../../../utils/formatCurrency'
 
 const props = defineProps({ payments: Object, filters: Object, dailyTotal: Number })
 const filters = ref({ ...(props.filters || {}), date: props.filters?.date || '', method: props.filters?.method || '', status: props.filters?.status || '' })

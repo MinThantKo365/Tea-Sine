@@ -20,7 +20,7 @@
           <tr v-for="item in menuItems" :key="item.id">
             <td>{{ item.name }}</td>
             <td>{{ item.category || '—' }}</td>
-            <td>{{ Number(item.price).toFixed(0) }} Ks</td>
+            <td>{{ formatCurrency(item.price) }}</td>
             <td><span :class="item.is_available ? 'text-success' : 'text-danger'">{{ item.is_available ? 'Yes' : 'No' }}</span></td>
             <td>
               <Link :href="`/admin/menu-items/${item.id}/edit`" class="btn btn-sm btn-outline-light me-1">Edit</Link>
@@ -37,6 +37,7 @@
 import { router } from '@inertiajs/vue3'
 import AdminLayout from '../../layout/AdminLayout.vue'
 import { Link } from '@inertiajs/vue3'
+import { formatCurrency } from '../../../utils/formatCurrency'
 
 defineProps({
   menuItems: Array,

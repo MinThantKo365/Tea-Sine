@@ -21,7 +21,7 @@
         <div class="card bg-dark border-secondary">
           <div class="card-body">
             <h6 class="text-muted text-uppercase small">Revenue</h6>
-            <h3 class="text-white mb-0">${{ revenue.toFixed(2) }}</h3>
+            <h3 class="text-white mb-0">{{ formatCurrency(revenue) }}</h3>
           </div>
         </div>
       </div>
@@ -49,6 +49,7 @@
 import { ref, watch } from 'vue'
 import { router } from '@inertiajs/vue3'
 import AdminLayout from '../../layout/AdminLayout.vue'
+import { formatCurrency } from '../../../utils/formatCurrency'
 
 const props = defineProps({ start: String, end: String, revenue: Number, ordersCount: Number, completedCount: Number })
 const start = ref(props.start || '')

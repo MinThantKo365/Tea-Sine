@@ -12,6 +12,10 @@
           </div>
           <div class="card-body bg-dark text-white">
             <p class="mb-1 small">Table: {{ order.table_number || '—' }} | {{ order.customer_name || 'Guest' }}</p>
+            <p v-if="order.notes" class="mb-2 small notes-box">
+              <i class="fa-solid fa-note-sticky me-1" aria-hidden="true"></i>
+              <strong>Notes:</strong> {{ order.notes }}
+            </p>
             <ul class="list-unstyled mb-3">
               <li v-for="oi in order.order_items" :key="oi.id" class="d-flex justify-content-between">
                 <span>{{ oi.menu_item?.name }} x{{ oi.quantity }}</span>
@@ -39,7 +43,7 @@ defineProps({ orders: Array })
 
 let refreshInterval
 onMounted(() => {
-  refreshInterval = setInterval(() => router.reload({ only: ['orders'] }), 10000)
+  refreshInterval = setInterval(() => router.reload({ only: ['orders'] }), 8000)
 })
 onUnmounted(() => clearInterval(refreshInterval))
 
@@ -57,3 +61,13 @@ function updateStatus(order, status) {
   router.patch(`/cook/orders/${order.id}/status`, { status }, { preserveScroll: true })
 }
 </script>
+
+<style scoped>
+.notes-box {
+  background: rgba(255, 193, 7, 0.12);
+  border-left: 3px solid #ffc107;
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+  color: var(--ts-text);
+}
+</style>

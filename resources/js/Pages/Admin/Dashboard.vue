@@ -14,7 +14,7 @@
         <div class="card bg-dark border-secondary">
           <div class="card-body">
             <h6 class="text-muted text-uppercase small">Revenue Today</h6>
-            <h3 class="text-white mb-0">${{ stats.revenue_today.toFixed(2) }}</h3>
+            <h3 class="text-white mb-0">{{ formatCurrency(stats.revenue_today) }}</h3>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
         <div class="card bg-dark border-secondary">
           <div class="card-body">
             <h6 class="text-muted text-uppercase small">Revenue This Month</h6>
-            <h3 class="text-white mb-0">${{ stats.revenue_month.toFixed(2) }}</h3>
+            <h3 class="text-white mb-0">{{ formatCurrency(stats.revenue_month) }}</h3>
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
         <div class="card bg-dark border-secondary">
           <div class="card-body">
             <h6 class="text-muted text-uppercase small">Salary (This Month)</h6>
-            <h3 class="text-info mb-0">${{ stats.salary_summary.toFixed(2) }}</h3>
+            <h3 class="text-info mb-0">{{ formatCurrency(stats.salary_summary) }}</h3>
           </div>
         </div>
       </div>
@@ -56,6 +56,7 @@
 
 <script setup>
 import AdminLayout from '../layout/AdminLayout.vue'
+import { formatCurrency } from '../../utils/formatCurrency'
 
 defineProps({
   stats: {

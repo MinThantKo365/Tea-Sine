@@ -1,9 +1,12 @@
 <template>
   <div class="login-page min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="theme-toggle-auth">
+      <ThemeToggle />
+    </div>
     <div class="login-container">
       <!-- Logo Section -->
       <div class="text-center mb-5">
-        <img src="/image/logo (2).png" alt="Tea Sine Logo" class="login-logo mb-4" />
+        <BrandLogo height="80px" class="mb-4 d-inline-block" />
         <h1 class="login-title mb-2">Welcome Back</h1>
         <p class="login-subtitle">Sign in to continue to your account</p>
       </div>
@@ -92,6 +95,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useForm } from '@inertiajs/vue3'
+import BrandLogo from '../components/BrandLogo.vue'
+import ThemeToggle from '../components/ThemeToggle.vue'
 
 const form = useForm({
   email: '',
@@ -116,10 +121,16 @@ const submit = () => {
 
 <style scoped>
 .login-page {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  background: var(--ts-auth-bg);
   padding: 2rem 1rem;
   position: relative;
   overflow: hidden;
+}
+.theme-toggle-auth {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 2;
 }
 
 /* .login-page::before {
@@ -165,26 +176,17 @@ const submit = () => {
   z-index: 1;
 }
 
-.login-logo {
-  height: 90px;
-  width: auto;
-  display: block;
-  margin: 0 auto;
-  filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.1));
-}
-
 .login-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--ts-auth-title);
   letter-spacing: -0.5px;
   margin-bottom: 0.5rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .login-subtitle {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--ts-auth-subtitle);
   font-weight: 400;
   margin: 0;
 }
@@ -366,13 +368,13 @@ const submit = () => {
 }
 
 .signup-text {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--ts-auth-footer);
   font-size: 0.9375rem;
   margin: 0;
 }
 
 .signup-link {
-  color: #ffffff;
+  color: var(--ts-accent);
   font-weight: 600;
   text-decoration: none;
   margin-left: 0.5rem;
@@ -381,7 +383,7 @@ const submit = () => {
 }
 
 .signup-link:hover {
-  border-bottom-color: #ffffff;
+  border-bottom-color: var(--ts-accent);
 }
 
 /* Responsive */
@@ -392,10 +394,6 @@ const submit = () => {
   
   .login-title {
     font-size: 1.75rem;
-  }
-  
-  .login-logo {
-    height: 70px;
   }
 }
 </style>

@@ -11,7 +11,7 @@
         <p class="text-white mb-1"><strong>Customer:</strong> {{ order.customer_name || '—' }}</p>
         <p class="text-white mb-1"><strong>Table:</strong> {{ order.table_number || '—' }}</p>
         <p class="text-white mb-1"><strong>Status:</strong> <span :class="statusClass(order.status)">{{ order.status }}</span></p>
-        <p class="text-white mb-0"><strong>Total:</strong> ${{ Number(order.total).toFixed(2) }}</p>
+        <p class="text-white mb-0"><strong>Total:</strong> {{ formatCurrency(order.total) }}</p>
       </div>
     </div>
     <div class="card bg-dark border-secondary mb-3">
@@ -19,7 +19,7 @@
       <ul class="list-group list-group-flush">
         <li v-for="oi in order.order_items" :key="oi.id" class="list-group-item bg-dark border-secondary text-white d-flex justify-content-between">
           <span>{{ oi.menu_item?.name }} x{{ oi.quantity }}</span>
-          <span>${{ Number(oi.subtotal).toFixed(2) }}</span>
+          <span>{{ formatCurrency(oi.subtotal) }}</span>
         </li>
       </ul>
     </div>
@@ -30,12 +30,18 @@
       <Link v-if="!order.payments?.length" :href="`/cashier/payments/order/${order.id}`" class="btn btn-primary">Process Payment</Link>
     </div>
     <Link v-else-if="order.status !== 'completed' && !order.payments?.length" :href="`/cashier/payments/order/${order.id}`" class="btn btn-primary">Process Payment</Link>
+    <div v-if="order.payments?.length" class="d-flex gap-2 mt-2">
+      <Link :href="`/cashier/payments/receipt/${order.id}`" class="btn btn-outline-light">
+        <i class="fa-solid fa-print me-1" aria-hidden="true"></i> Print Receipt
+      </Link>
+    </div>
   </CashierLayout>
 </template>
 
 <script setup>
 import CashierLayout from '../../layout/CashierLayout.vue'
 import { Link, router, usePage } from '@inertiajs/vue3'
+import { formatCurrency } from '../../../utils/formatCurrency'
 
 const props = defineProps({ order: Object })
 

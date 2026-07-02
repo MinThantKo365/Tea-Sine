@@ -34,22 +34,13 @@ const pageTitle = computed(() => page.props.pageTitle || 'Admin')
 const sidebarOpen = ref(false)
 
 const menuItems = [
-  { label: 'Dashboard', href: '/admin/dashboard' },
-  { label: 'Orders', href: '/admin/orders' },
-  { label: 'Payments', href: '/admin/payments' },
-  { label: 'Menu Management', href: '/admin/menu-items' },
-  { label: 'User Accounts', href: '/admin/users' },
+  { label: 'Dashboard', href: '/admin/dashboard', icon: 'fa-solid fa-gauge' },
+  { label: 'Orders', href: '/admin/orders', icon: 'fa-solid fa-receipt' },
+  { label: 'Payments', href: '/admin/payments', icon: 'fa-solid fa-credit-card' },
+  { label: 'Menu Management', href: '/admin/menu-items', icon: 'fa-solid fa-utensils' },
+  { label: 'User Accounts', href: '/admin/users', icon: 'fa-solid fa-users' },
   // { label: 'Staff', href: '/admin/staff' },
   // { label: 'Payslips', href: '/admin/payslips' },
   // { label: 'Reports', href: '/admin/reports' },
 ]
 </script>
-
-<style scoped>
-.dashboard-layout { display: flex; min-height: 100vh; background: #0a0a0a; }
-.layout-main { flex: 1; margin-left: 260px; display: flex; flex-direction: column; min-width: 0; }
-.layout-content { flex: 1; padding: 1.5rem; }
-@media (max-width: 991.98px) {
-  .layout-main { margin-left: 0; }
-}
-</style>

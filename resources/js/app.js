@@ -3,8 +3,12 @@ import 'bootstrap/dist/js/bootstrap.bundle.js'
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+import { useTheme } from './composables/useTheme'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
+
+const { initTheme } = useTheme()
+initTheme()
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

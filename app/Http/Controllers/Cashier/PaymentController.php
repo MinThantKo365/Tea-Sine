@@ -83,7 +83,7 @@ class PaymentController extends Controller
             $order->update(['status' => Order::STATUS_COMPLETED]);
         });
 
-        return redirect()->route('cashier.payments.receipt', $order)->with('success', 'Payment recorded.');
+        return redirect()->route('cashier.payments.receipt', $order)->with('success', 'Payment recorded. You can print the receipt below.');
     }
 
     public function receipt(Order $order): Response

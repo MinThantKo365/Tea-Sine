@@ -1,11 +1,188 @@
 /* Bootstrap CSS */
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
-/* Custom styles */
+/* ── Theme tokens ── */
+:root,
+[data-theme="light"] {
+  --ts-bg: #f0f4f8;
+  --ts-surface: #ffffff;
+  --ts-surface-alt: #f8fafc;
+  --ts-text: #1e293b;
+  --ts-text-muted: #64748b;
+  --ts-border: #e2e8f0;
+  --ts-brand-navy: #0a2540;
+  --ts-accent: #0d6efd;
+  --ts-sidebar-bg: #ffffff;
+  --ts-sidebar-text: #475569;
+  --ts-sidebar-text-hover: #0a2540;
+  --ts-sidebar-hover: rgba(10, 37, 64, 0.06);
+  --ts-sidebar-active-bg: rgba(13, 110, 253, 0.1);
+  --ts-topbar-bg: #ffffff;
+  --ts-overlay: rgba(0, 0, 0, 0.45);
+  --ts-auth-bg: linear-gradient(135deg, #e8eef5 0%, #f0f4f8 50%, #e2e8f0 100%);
+  --ts-auth-title: #0a2540;
+  --ts-auth-subtitle: #64748b;
+  --ts-auth-footer: #475569;
+}
+
+[data-theme="dark"] {
+  --ts-bg: #0a0a0a;
+  --ts-surface: #141414;
+  --ts-surface-alt: #1a1a1a;
+  --ts-text: #ffffff;
+  --ts-text-muted: rgba(255, 255, 255, 0.65);
+  --ts-border: rgba(255, 255, 255, 0.08);
+  --ts-brand-navy: #0a2540;
+  --ts-accent: #0d6efd;
+  --ts-sidebar-bg: #0f0f0f;
+  --ts-sidebar-text: rgba(255, 255, 255, 0.75);
+  --ts-sidebar-text-hover: #ffffff;
+  --ts-sidebar-hover: rgba(255, 255, 255, 0.06);
+  --ts-sidebar-active-bg: rgba(255, 255, 255, 0.08);
+  --ts-topbar-bg: #0a0a0a;
+  --ts-overlay: rgba(0, 0, 0, 0.55);
+  --ts-auth-bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  --ts-auth-title: #ffffff;
+  --ts-auth-subtitle: rgba(255, 255, 255, 0.75);
+  --ts-auth-footer: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Base ── */
 body {
-    font-family: Arial, sans-serif;
-    background: #0a0a0a;
-    color: #fff;
+  font-family: Arial, sans-serif;
+  background: var(--ts-bg);
+  color: var(--ts-text);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ── Dashboard shell ── */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--ts-bg);
+  color: var(--ts-text);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+.layout-main {
+  flex: 1;
+  margin-left: 260px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.layout-content {
+  flex: 1;
+  padding: 1.5rem;
+}
+@media (max-width: 991.98px) {
+  .layout-main {
+    margin-left: 0;
+  }
+}
+
+/* ── Light-mode overrides for Bootstrap dark utilities used on pages ── */
+[data-theme="light"] .layout-content {
+  color: var(--ts-text);
+}
+
+[data-theme="light"] .layout-content .text-white,
+[data-theme="light"] .layout-content .card-header,
+[data-theme="light"] .layout-content .form-label,
+[data-theme="light"] .layout-content .card.bg-dark,
+[data-theme="light"] .layout-content .card.bg-dark .card-body,
+[data-theme="light"] .layout-content .card.bg-dark .card-body > *:not(.btn):not(.badge):not(.alert) {
+  color: var(--ts-text) !important;
+}
+
+[data-theme="light"] .layout-content .list-group-item.bg-dark,
+[data-theme="light"] .layout-content .list-group-item.bg-transparent.border-secondary {
+  background-color: var(--ts-surface) !important;
+  border-color: var(--ts-border) !important;
+  color: var(--ts-text) !important;
+}
+
+[data-theme="light"] .layout-content .card-header.text-white {
+  background-color: var(--ts-surface-alt) !important;
+  border-bottom: 1px solid var(--ts-border);
+}
+
+[data-theme="light"] h1.text-white,
+[data-theme="light"] h3.text-white,
+[data-theme="light"] h5.text-white,
+[data-theme="light"] h6.text-white,
+[data-theme="light"] p.text-white,
+[data-theme="light"] span.text-white,
+[data-theme="light"] div.text-white,
+[data-theme="light"] li.text-white,
+[data-theme="light"] label.text-white,
+[data-theme="light"] .text-white {
+  color: var(--ts-text) !important;
+}
+
+[data-theme="light"] .text-muted {
+  color: var(--ts-text-muted) !important;
+}
+
+[data-theme="light"] .bg-dark {
+  background-color: var(--ts-surface) !important;
+  color: var(--ts-text);
+}
+
+[data-theme="light"] .card.bg-dark {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .border-secondary {
+  border-color: var(--ts-border) !important;
+}
+
+[data-theme="light"] .table-dark {
+  --bs-table-bg: var(--ts-surface);
+  --bs-table-color: var(--ts-text);
+  --bs-table-striped-bg: var(--ts-surface-alt);
+  --bs-table-hover-bg: #eef2f7;
+  --bs-table-border-color: var(--ts-border);
+  color: var(--ts-text);
+}
+
+[data-theme="light"] .list-group-item.bg-transparent.border-secondary {
+  border-color: var(--ts-border) !important;
+  color: var(--ts-text) !important;
+}
+
+[data-theme="light"] .form-control.bg-secondary,
+[data-theme="light"] .form-select.bg-secondary,
+[data-theme="light"] .form-control.text-white,
+[data-theme="light"] .form-select.text-white {
+  background-color: var(--ts-surface-alt) !important;
+  color: var(--ts-text) !important;
+  border: 1px solid var(--ts-border) !important;
+}
+
+[data-theme="light"] .btn-outline-light {
+  color: var(--ts-text);
+  border-color: var(--ts-border);
+}
+
+[data-theme="light"] .btn-outline-light:hover,
+[data-theme="light"] .btn-outline-light:focus {
+  background-color: var(--ts-accent);
+  border-color: var(--ts-accent);
+  color: #fff;
+}
+
+[data-theme="light"] hr.border-secondary {
+  border-color: var(--ts-border) !important;
+  opacity: 1;
+}
+
+[data-theme="light"] .theme-toggle-btn,
+[data-theme="light"] .theme-option {
+  color: var(--ts-text);
+}
+
+[data-theme="light"] .dropdown-header {
+  color: var(--ts-text-muted) !important;
 }
 
 /* Status badges (OMS) */
@@ -15,3 +192,57 @@ body {
 .badge-status-ready { background-color: #198754; color: #fff; }
 .badge-status-completed { background-color: #6c757d; color: #fff; }
 .badge-status-cancelled { background-color: #dc3545; color: #fff; }
+
+/* ── Receipt print: only the receipt content ── */
+@media print {
+  @page {
+    margin: 10mm;
+    size: auto;
+  }
+
+  body {
+    background: #fff !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #receipt-print,
+  #receipt-print * {
+    visibility: visible;
+  }
+
+  #receipt-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 80mm;
+    margin: 0;
+    padding: 0;
+    border: none !important;
+    box-shadow: none !important;
+    background: #fff !important;
+  }
+
+  #receipt-print .receipt-body {
+    padding: 0;
+  }
+
+  #receipt-print .receipt-shop,
+  #receipt-print .receipt-meta,
+  #receipt-print .receipt-item,
+  #receipt-print .receipt-row,
+  #receipt-print .receipt-total,
+  #receipt-print .receipt-total strong {
+    color: #000 !important;
+  }
+
+  #receipt-print .receipt-divider {
+    border-color: #000 !important;
+    opacity: 1;
+  }
+}

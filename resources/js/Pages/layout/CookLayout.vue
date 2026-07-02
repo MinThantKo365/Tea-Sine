@@ -34,17 +34,11 @@ const pageTitle = computed(() => page.props.pageTitle || 'Kitchen')
 const sidebarOpen = ref(false)
 
 const menuItems = [
-  { label: 'Kitchen Orders', href: '/cook/orders' },
-  { label: 'Completed Orders', href: '/cook/orders/completed' },
+  { label: 'Kitchen Orders', href: '/cook/orders', icon: 'fa-solid fa-fire-burner' },
+  { label: 'Completed Orders', href: '/cook/orders/completed', icon: 'fa-solid fa-circle-check' },
 ]
 </script>
 
 <style scoped>
-.dashboard-layout { display: flex; min-height: 100vh; background: #0a0a0a; }
-.layout-main { flex: 1; margin-left: 260px; display: flex; flex-direction: column; min-width: 0; }
-.layout-content { flex: 1; padding: 1.5rem; }
 .cook-layout .layout-content { font-size: 1.05rem; }
-@media (max-width: 991.98px) {
-  .layout-main { margin-left: 0; }
-}
 </style>

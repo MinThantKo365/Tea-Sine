@@ -1,9 +1,12 @@
 <template>
   <div class="register-page min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="theme-toggle-auth">
+      <ThemeToggle />
+    </div>
     <div class="register-container">
       <!-- Logo Section -->
       <div class="text-center mb-2">
-        <img src="/image/logo (2).png" alt="Tea Sine Logo" class="register-logo mb-3" />
+        <BrandLogo height="80px" class="mb-3 d-inline-block" />
         <h1 class="register-title mb-2">Create Account</h1>
         <p class="register-subtitle">Sign up to get started with Tea Sine</p>
       </div>
@@ -119,6 +122,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useForm } from '@inertiajs/vue3'
+import BrandLogo from '../components/BrandLogo.vue'
+import ThemeToggle from '../components/ThemeToggle.vue'
 
 const form = useForm({
   name: '',
@@ -145,10 +150,16 @@ const submit = () => {
 
 <style scoped>
 .register-page {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  background: var(--ts-auth-bg);
   padding: 2rem 1rem;
   position: relative;
   overflow: hidden;
+}
+.theme-toggle-auth {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 2;
 }
 
 .register-page::before {
@@ -194,26 +205,17 @@ const submit = () => {
   z-index: 1;
 }
 
-.register-logo {
-  height: 90px;
-  width: auto;
-  display: block;
-  margin: 0 auto;
-  filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.1));
-}
-
 .register-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--ts-auth-title);
   letter-spacing: -0.5px;
   margin-bottom: 0.5rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .register-subtitle {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--ts-auth-subtitle);
   font-weight: 400;
   margin: 0;
 }
@@ -360,13 +362,13 @@ const submit = () => {
 }
 
 .signin-text {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--ts-auth-footer);
   font-size: 0.9375rem;
   margin: 0;
 }
 
 .signin-link {
-  color: #ffffff;
+  color: var(--ts-accent);
   font-weight: 600;
   text-decoration: none;
   margin-left: 0.5rem;
@@ -375,7 +377,7 @@ const submit = () => {
 }
 
 .signin-link:hover {
-  border-bottom-color: #ffffff;
+  border-bottom-color: var(--ts-accent);
 }
 
 /* Responsive */
@@ -386,10 +388,6 @@ const submit = () => {
   
   .register-title {
     font-size: 1.75rem;
-  }
-  
-  .register-logo {
-    height: 70px;
   }
 }
 </style>

@@ -96,11 +96,23 @@ class OrderController extends Controller
 
     public function index(Request $request): Response
     {
-        $orders = Order::with(['user', 'orderItems.menuItem'])
-            ->latest()
-            ->paginate(20);
+        $date = $request->get('date', now()->toDateString());
+        $orderNumber = $request->get('order_number', '');
 
-        return Inertia::render('Cashier/Orders/Index', ['orders' => $orders]);
+        $orders = Order::with(['user', 'orderItems.menuItem'])
+            ->whereDate('created_at', $date)
+            ->when($orderNumber, fn ($query) => $query->where('order_number', 'like', '%'.$orderNumber.'%'))
+            ->latest()
+            ->paginate(20)
+            ->withQueryString();
+
+        return Inertia::render('Cashier/Orders/Index', [
+            'orders' => $orders,
+            'filters' => [
+                'date' => $date,
+                'order_number' => $orderNumber,
+            ],
+        ]);
     }
 
     public function confirm(Order $order): RedirectResponse
